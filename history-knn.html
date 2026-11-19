@@ -5,29 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#8B0000">
 <title>История КНН — колледж нефтехимии</title>
-<!--
-  ФОТО:
-  knn-hero.jpg — шапка
-  knn-about.jpg — блок «О колледже»
-  knn1963.jpg knn1980.jpg knn1995.jpg knn2010.jpg knntoday.jpg — фоны периодов
--->
 <style>
 :root{
   --burgundy:#8B0000; --yellow:#f4e400;
-  --dark:#121212; --card:#1c1c1c; --card-2:#242424;
-  --line:rgba(255,255,255,.12); --text:#f4f4f4; --muted:#aab1b7;
+  --dark:#1b1f24; --card:#22282f; --card-2:#2b323a;
+  --line:rgba(255,255,255,.12); --text:#f4f6f8; --muted:#aab3bb;
   --radius:20px; --gap:clamp(14px,2.5vw,22px); --maxw:1080px;
   --accent:var(--burgundy);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Segoe UI',Roboto,system-ui,-apple-system,sans-serif;background:var(--dark);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+body{font-family:'Segoe UI',Roboto,system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.6;background-color:var(--dark);background-image:linear-gradient(180deg,#1b1f24,#242a31 50%,#2c333b);background-attachment:fixed;-webkit-font-smoothing:antialiased;}
 img{max-width:100%;display:block;}
-
 .progress-bar{position:fixed;top:0;left:0;height:4px;width:0%;background:linear-gradient(90deg,var(--yellow),var(--burgundy));z-index:1000;transition:width .12s linear;}
-
 header{
-  position:relative;min-height:clamp(220px,42vh,420px);
+  position:relative;min-height:clamp(240px,44vh,440px);
   display:flex;align-items:center;justify-content:center;text-align:center;
   padding:clamp(2rem,6vw,3.5rem) 1rem;
   padding-top:calc(clamp(2rem,6vw,3.5rem) + env(safe-area-inset-top));
@@ -35,31 +27,18 @@ header{
   background-image:
     linear-gradient(135deg, rgba(139,0,0,.78), rgba(60,0,0,.65) 55%, rgba(0,0,0,.8)),
     url('knn-hero.jpg');
-  background-size:cover;background-position:center;background-attachment:scroll;
-  overflow:hidden;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  background-attachment:scroll;overflow:hidden;
 }
 header::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%, rgba(0,0,0,.55), transparent 60%);pointer-events:none;}
-header h1{position:relative;z-index:1;font-size:clamp(1.5rem,6vw,2.6rem);line-height:1.15;font-weight:800;text-shadow:0 2px 14px rgba(0,0,0,.7);}
+header h1{position:relative;z-index:1;font-size:clamp(1.5rem,6vw,2.6rem);line-height:1.15;font-weight:800;text-shadow:0 2px 14px rgba(0,0,0,.75);}
 header h1 small{display:block;font-size:.5em;font-weight:400;opacity:.95;margin-top:.4rem;letter-spacing:.5px;}
-
 section{width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(1.2rem,4vw,2.6rem) clamp(.9rem,4vw,1.4rem);}
 h2{color:var(--yellow);font-size:clamp(1.15rem,4.5vw,1.65rem);margin:0 0 .9rem;padding-left:.7rem;border-left:5px solid var(--accent);line-height:1.25;}
 h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
-
-.about-card{
-  position:relative;border-radius:var(--radius);overflow:hidden;
-  border:1px solid var(--line);background-color:#1a0808;
-  background-image:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.82)), url('knn-about.jpg');
-  background-size:cover;background-position:center;min-height:220px;
-  display:flex;align-items:flex-end;
-}
+.about-card{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background-color:#1a0808;background-image:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.82)), url('knn-about.jpg');background-size:cover;background-position:center;min-height:220px;display:flex;align-items:flex-end;}
 .about-card p{position:relative;z-index:1;padding:clamp(1rem,4vw,1.4rem);font-size:clamp(.92rem,2.6vw,1rem);color:#f0eaea;text-shadow:0 1px 4px rgba(0,0,0,.85);}
-
-.stats-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--gap);
-  background:radial-gradient(circle at 10% 10%, rgba(139,0,0,.18), transparent 40%), radial-gradient(circle at 90% 90%, rgba(244,228,0,.06), transparent 40%);
-  padding:var(--gap);border-radius:var(--radius);
-}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--gap);background:radial-gradient(circle at 10% 10%, rgba(139,0,0,.18), transparent 40%), radial-gradient(circle at 90% 90%, rgba(244,228,0,.06), transparent 40%);padding:var(--gap);border-radius:var(--radius);}
 .stat-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem .85rem;text-align:center;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;user-select:none;-webkit-tap-highlight-color:transparent;}
 .stat-card:hover{transform:translateY(-3px);border-color:var(--yellow);background:var(--card-2);}
 .stat-card:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
@@ -70,15 +49,13 @@ h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
 .stat-detail{grid-column:1/-1;background:var(--card-2);border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:var(--radius);padding:0 1rem;max-height:0;overflow:hidden;opacity:0;transition:max-height .45s ease,opacity .3s,padding .3s;font-size:clamp(.88rem,2.5vw,.96rem);color:#e7ebee;}
 .stat-detail.open{max-height:460px;opacity:1;padding:1rem;}
 .stat-detail strong{color:var(--yellow);}
-
 .exports-block{border-radius:var(--radius);padding:clamp(.9rem,3vw,1.3rem);border:1px solid var(--line);background:linear-gradient(135deg, rgba(139,0,0,.22), rgba(0,0,0,.15)), var(--card);}
 .dir-grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:.6rem;}
-.dir-card{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;border-top:3px solid var(--accent);}
+.dir-card{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;border-top:3px solid var(--accent);}
 .dir-card h3{font-size:1rem;color:var(--yellow);margin-bottom:.4rem;}
 .dir-card p{font-size:.88rem;color:#d6dce0;}
 .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem;}
 .tag{background:rgba(139,0,0,.25);border:1px solid rgba(139,0,0,.6);color:#f2d6d6;padding:.4rem .75rem;border-radius:999px;font-size:clamp(.74rem,2.4vw,.82rem);font-weight:600;}
-
 .timeline-wrap{overflow-x:auto;padding:14px 0 18px;margin:0 -4px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
 .timeline-horizontal{display:flex;gap:clamp(22px,5vw,42px);position:relative;padding:16px 18px;min-width:max-content;}
 .timeline-horizontal::before{content:"";position:absolute;top:30px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--burgundy),var(--yellow));transform:translateY(-50%);z-index:0;opacity:.5;}
@@ -87,7 +64,6 @@ h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
 .timeline-dot.active .dot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 14px var(--yellow);transform:scale(1.18);}
 .timeline-dot.read .dot{background:var(--burgundy);border-color:var(--burgundy);}
 .timeline-dot span{font-size:clamp(.72rem,2.3vw,.84rem);font-weight:700;text-align:center;max-width:96px;line-height:1.2;}
-
 .period-detail{position:relative;background-size:cover;background-position:center;background-repeat:no-repeat;background-color:var(--card);border-radius:var(--radius);padding:0 1rem;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .3s;border-left:3px solid var(--yellow);margin-bottom:0;}
 .period-detail::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.84));z-index:0;pointer-events:none;}
 .period-detail > *{position:relative;z-index:1;}
@@ -96,48 +72,35 @@ h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
 .period-detail p:last-child,.period-detail .detail-fact:last-child{margin-bottom:0;}
 .period-detail strong{color:var(--yellow);}
 .detail-fact{font-style:italic;color:var(--yellow);}
-
 a.back{display:inline-block;margin-top:2rem;background:var(--accent);color:#fff;text-decoration:none;padding:12px 26px;border-radius:999px;font-weight:700;transition:transform .2s,opacity .2s;}
 a.back:hover{transform:translateY(-2px);opacity:.92;}
-
 #detail-1963{background-image:url('knn1963.jpg');}
 #detail-1980{background-image:url('knn1980.jpg');}
 #detail-1995{background-image:url('knn1995.jpg');}
 #detail-2010{background-image:url('knn2010.jpg');}
 #detail-today{background-image:url('knntoday.jpg');}
-
-@media (min-width:1024px){ header{background-attachment:fixed;} }
-@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important;scroll-behavior:auto!important;} header{background-attachment:scroll;} }
+@media (min-width:1024px){header{background-attachment:fixed;}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important;}header{background-attachment:scroll;}}
 </style>
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
-
-<header>
-  <h1>🏛️ История КНН<small>Колледж нефтехимии и нефтепереработки им. Н.В. Лемаева</small></h1>
-</header>
-
+<header><h1>🏛️ История КНН<small>Колледж нефтехимии и нефтепереработки им. Н.В. Лемаева</small></h1></header>
 <section>
 <h2>О колледже</h2>
-<div class="about-card">
-  <p>Колледж нефтехимии и нефтепереработки (КНН) — ведущее учебное заведение Татарстана, готовящее кадры для нефтехимической отрасли. Основан в 1960-х для обеспечения Нижнекамского нефтехимического комбината квалифицированными рабочими и техниками. Носит имя выдающегося организатора производства Николая Васильевича Лемаева.</p>
-</div>
+<div class="about-card"><p>Колледж нефтехимии и нефтепереработки (КНН) — ведущее учебное заведение Татарстана, готовящее кадры для нефтехимической отрасли. Основан в 1960-х для обеспечения Нижнекамского нефтехимического комбината квалифицированными рабочими и техниками. Носит имя Николая Васильевича Лемаева.</p></div>
 
 <h2>🔢 Цифры колледжа</h2>
 <p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на цифру, чтобы узнать подробности.</p>
 <div class="stats-grid">
-  <div class="stat-card" tabindex="0" data-info="<strong>1963 год</strong> — при Нижнекамском нефтехимическом комбинате открыто ГПТУ-94. Первый набор — 300 учащихся: аппаратчики, слесари, лаборанты.">
-    <div class="stat-value">1963</div><div class="stat-label">год основания</div><div class="stat-more">подробнее →</div>
-  </div>
-  <div class="stat-card" tabindex="0" data-info="<strong>1500+ студентов</strong> — сегодня в колледже обучаются по 6 направлениям подготовки, включая химическую технологию и нефтегазовое дело.">
-    <div class="stat-value" data-target="1500" data-suffix="+">0</div><div class="stat-label">студентов</div><div class="stat-more">подробнее →</div>
-  </div>
-  <div class="stat-card" tabindex="0" data-info="<strong>6 направлений</strong> — химическая технология, нефтегазовое дело, автоматизация, экономика, бухучёт и рабочие специальности.">
-    <div class="stat-value" data-target="6">0</div><div class="stat-label">направлений</div><div class="stat-more">подробнее →</div>
-  </div>
-  <div class="stat-card" tabindex="0" data-info="<strong>Топ-100 СПО</strong> — в 2023 году колледж вошёл в топ-100 лучших организаций среднего профессионального образования России.">
-    <div class="stat-value" data-target="100">0</div><div class="stat-label">место в топ-100 СПО</div><div class="stat-more">подробнее →</div>
-  </div>
+  <div class="stat-card" tabindex="0" data-info="<strong>1963 год</strong> — при комбинате открыто ГПТУ-94. Первый набор — 300 учащихся.">
+    <div class="stat-value">1963</div><div class="stat-label">год основания</div><div class="stat-more">подробнее →</div></div>
+  <div class="stat-card" tabindex="0" data-info="<strong>1500+ студентов</strong> — сегодня обучаются по 6 направлениям подготовки.">
+    <div class="stat-value" data-target="1500" data-suffix="+">0</div><div class="stat-label">студентов</div><div class="stat-more">подробнее →</div></div>
+  <div class="stat-card" tabindex="0" data-info="<strong>6 направлений</strong> — химическая технология, нефтегазовое дело, автоматизация, экономика, бухучёт, рабочие специальности.">
+    <div class="stat-value" data-target="6">0</div><div class="stat-label">направлений</div><div class="stat-more">подробнее →</div></div>
+  <div class="stat-card" tabindex="0" data-info="<strong>Топ-100 СПО</strong> — в 2023 году колледж вошёл в топ-100 лучших организаций СПО России.">
+    <div class="stat-value" data-target="100">0</div><div class="stat-label">место в топ-100 СПО</div><div class="stat-more">подробнее →</div></div>
   <div class="stat-detail" id="statDetail">Нажмите на цифру ↑</div>
 </div>
 
@@ -145,10 +108,10 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
 <div class="exports-block">
   <p style="color:#e6dede;">Колледж готовит кадры для крупнейших предприятий нефтехимии. Выпускники востребованы в России и за рубежом.</p>
   <div class="dir-grid">
-    <div class="dir-card"><h3>Химическая технология</h3><p>Подготовка аппаратчиков и технологов для НКНХ, ТАНЕКО и других предприятий СИБУРа.</p></div>
-    <div class="dir-card"><h3>Нефтегазовое дело</h3><p>Специалисты по переработке углеводородов, эксплуатации и обслуживанию оборудования.</p></div>
-    <div class="dir-card"><h3>Автоматизация</h3><p>Наладка и обслуживание цифровых систем управления производством.</p></div>
-    <div class="dir-card"><h3>Экономика и учёт</h3><p>Экономисты, бухгалтеры и специалисты по документообороту для промышленности.</p></div>
+    <div class="dir-card"><h3>Химическая технология</h3><p>Аппаратчики и технологи для НКНХ, ТАНЕКО и СИБУРа.</p></div>
+    <div class="dir-card"><h3>Нефтегазовое дело</h3><p>Переработка углеводородов, эксплуатация оборудования.</p></div>
+    <div class="dir-card"><h3>Автоматизация</h3><p>Цифровые системы управления производством.</p></div>
+    <div class="dir-card"><h3>Экономика и учёт</h3><p>Экономисты и бухгалтеры для промышленности.</p></div>
   </div>
   <h3 style="margin-top:1.2rem;color:var(--yellow);font-size:1rem;">География трудоустройства</h3>
   <div class="tags">
@@ -158,7 +121,6 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
 
 <h2>📅 Этапы развития колледжа</h2>
 <p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на точку на таймлайне, чтобы раскрыть период.</p>
-
 <div class="timeline-wrap">
   <div class="timeline-horizontal">
     <button class="timeline-dot" data-id="1963" onclick="openPeriod('1963')"><span class="dot"></span><span>1963<br>основание</span></button>
@@ -170,36 +132,33 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
 </div>
 
 <div id="detail-1963" class="period-detail">
-  <p><strong>Первые шаги:</strong> В 1963 году при комбинате открыто ГПТУ-94 (позже ставшее КНН). Первый набор — 300 учащихся. Готовили аппаратчиков, слесарей, лаборантов. Занятия проходили в приспособленных помещениях, но энтузиазм был огромный.</p>
+  <p><strong>Первые шаги:</strong> В 1963 году при комбинате открыто ГПТУ-94 (позже ставшее КНН). Первый набор — 300 учащихся. Готовили аппаратчиков, слесарей, лаборантов.</p>
   <div class="detail-fact">✨ Первый директор — В.И. Панкратов, ветеран Великой Отечественной войны.</div>
 </div>
 <div id="detail-1980" class="period-detail">
-  <p><strong>Расцвет ПТУ:</strong> Построен новый учебный корпус, мастерские, общежитие. Училище стало базовым для подготовки кадров НКНХ и шинного завода. В 1986 году присвоен статус «Среднее профессионально-техническое училище № 94». Выпускники работают на ключевых производствах.</p>
-  <div class="detail-fact">✨ Училище награждено переходящим Красным знаменем ЦК ВЛКСМ за шефство над стройками.</div>
+  <p><strong>Расцвет ПТУ:</strong> Построен новый учебный корпус, мастерские, общежитие. В 1986 году присвоен статус СПТУ № 94. Выпускники работают на ключевых производствах.</p>
+  <div class="detail-fact">✨ Училище награждено переходящим Красным знаменем ЦК ВЛКСМ.</div>
 </div>
 <div id="detail-1995" class="period-detail">
-  <p><strong>Новый статус:</strong> В 1995 году училище преобразовано в «Нижнекамский нефтехимический колледж». Введены специальности: экономика, бухучёт, автоматизация. Началось сотрудничество с КНИТУ (КХТИ). Колледж одним из первых в регионе перешёл на многоуровневую подготовку.</p>
+  <p><strong>Новый статус:</strong> В 1995 году училище преобразовано в «Нижнекамский нефтехимический колледж». Введены специальности: экономика, бухучёт, автоматизация.</p>
   <div class="detail-fact">✨ В 1998 году колледж возглавил З.Ф. Ганиев, заслуженный учитель РТ.</div>
 </div>
 <div id="detail-2010" class="period-detail">
-  <p><strong>Цифровая эпоха:</strong> Открыты лаборатории с современным оборудованием, внедрены дуальные программы. Колледж стал региональным центром WorldSkills. В 2015 году присвоено имя Н.В. Лемаева — легендарного гендиректора НКНХ. Введены специальности «химическая технология», «нефтегазовое дело».</p>
-  <div class="detail-fact">✨ Студенты колледжа неоднократно побеждали в национальных чемпионатах WorldSkills.</div>
+  <p><strong>Цифровая эпоха:</strong> Открыты лаборатории с современным оборудованием, внедрены дуальные программы. В 2015 году присвоено имя Н.В. Лемаева.</p>
+  <div class="detail-fact">✨ Студенты колледжа неоднократно побеждали в чемпионатах WorldSkills.</div>
 </div>
 <div id="detail-today" class="period-detail">
-  <p><strong>Современный колледж:</strong> КНН — это 1500 студентов, 6 направлений, современные мастерские и цифровые лаборатории. Колледж — базовая площадка подготовки кадров для СИБУРа. Выпускники востребованы на предприятиях Нижнекамска, Казани и других городов.</p>
+  <p><strong>Современный колледж:</strong> КНН — это 1500 студентов, 6 направлений, современные мастерские и цифровые лаборатории. Колледж — базовая площадка подготовки кадров для СИБУРа.</p>
   <div class="detail-fact">✨ В 2023 году колледж вошёл в топ-100 лучших организаций СПО России.</div>
 </div>
-
 <a class="back" href="index.html">← На главную</a>
 </section>
-
 <script>
 window.addEventListener('scroll', () => {
   const st = window.pageYOffset;
   const dh = document.documentElement.scrollHeight - window.innerHeight;
   document.getElementById('progressBar').style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
 }, {passive:true});
-
 function animateCounter(el){
   const target = parseInt(el.dataset.target,10);
   const suffix = el.dataset.suffix || '';
@@ -214,11 +173,8 @@ function animateCounter(el){
   }
   requestAnimationFrame(tick);
 }
-const io = new IntersectionObserver((es,ob)=>{
-  es.forEach(en=>{ if(en.isIntersecting){ animateCounter(en.target); ob.unobserve(en.target);} });
-},{threshold:.4});
+const io = new IntersectionObserver((es,ob)=>{es.forEach(en=>{if(en.isIntersecting){animateCounter(en.target);ob.unobserve(en.target);}});},{threshold:.4});
 document.querySelectorAll('.stat-value[data-target]').forEach(el=>io.observe(el));
-
 const statDetail = document.getElementById('statDetail');
 document.querySelectorAll('.stat-card').forEach(card=>{
   const open = ()=>{
@@ -231,7 +187,6 @@ document.querySelectorAll('.stat-card').forEach(card=>{
   card.addEventListener('click', open);
   card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); }});
 });
-
 function openPeriod(id){
   const detail = document.getElementById('detail-'+id);
   const dot = document.querySelector(`.timeline-dot[data-id="${id}"]`);
