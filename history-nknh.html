@@ -5,12 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#20B2AA">
 <title>История НижнекамскНефтехим</title>
+<!--
+  ФОТО:
+  nknh-hero.jpg — шапка
+  nknh-about.jpg — блок «О предприятии»
+  nknh1960.jpg nknh1970.jpg nknh1990.jpg nknh2000.jpg nknhtoday.jpg — фоны периодов
+-->
 <style>
 :root{
   --teal:#20B2AA; --yellow:#f4e400;
-  --dark:#141414; --card:#1e1e1e; --card-2:#262626;
-  --line:rgba(255,255,255,.12); --text:#f2f2f2; --muted:#a9b0b6;
-  --radius:18px; --gap:clamp(14px,2.5vw,22px); --maxw:1080px;
+  --dark:#121212; --card:#1c1c1c; --card-2:#242424;
+  --line:rgba(255,255,255,.12); --text:#f4f4f4; --muted:#aab1b7;
+  --radius:20px; --gap:clamp(14px,2.5vw,22px); --maxw:1080px;
+  --accent:var(--teal);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -18,137 +25,139 @@ body{font-family:'Segoe UI',Roboto,system-ui,-apple-system,sans-serif;background
 img{max-width:100%;display:block;}
 
 .progress-bar{position:fixed;top:0;left:0;height:4px;width:0%;background:linear-gradient(90deg,var(--yellow),var(--teal));z-index:1000;transition:width .12s linear;}
-header{background:var(--teal);padding:clamp(1.6rem,5vw,2.8rem) 1rem;text-align:center;padding-top:calc(clamp(1.6rem,5vw,2.8rem) + env(safe-area-inset-top));}
-h1{font-size:clamp(1.35rem,5.4vw,2.3rem);line-height:1.2;font-weight:800;}
-h1 small{display:block;font-size:.48em;font-weight:400;opacity:.9;margin-top:.35rem;}
-section{width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(1.2rem,4vw,2.6rem) clamp(.9rem,4vw,1.4rem);}
-h2{color:var(--yellow);font-size:clamp(1.15rem,4.5vw,1.65rem);margin:0 0 .9rem;padding-left:.7rem;border-left:5px solid var(--teal);line-height:1.25;}
-h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
-.description-text{background:var(--card);border:1px solid var(--line);padding:clamp(.9rem,3vw,1.2rem);border-radius:var(--radius);color:#dfe4e8;font-size:clamp(.92rem,2.6vw,1rem);}
-.hero-photo{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);margin:1.2rem 0 0;border:1px solid var(--line);}
 
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--gap);}
-.stat-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem .85rem;text-align:center;cursor:pointer;transition:transform .25s,border-color .25s;user-select:none;-webkit-tap-highlight-color:transparent;}
-.stat-card:hover{transform:translateY(-3px);border-color:var(--yellow);}
+header{
+  position:relative;min-height:clamp(220px,42vh,420px);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:clamp(2rem,6vw,3.5rem) 1rem;
+  padding-top:calc(clamp(2rem,6vw,3.5rem) + env(safe-area-inset-top));
+  background-color:#062a28;
+  background-image:
+    linear-gradient(135deg, rgba(32,178,170,.7), rgba(6,60,58,.72) 55%, rgba(0,0,0,.8)),
+    url('nknh-hero.jpg');
+  background-size:cover;background-position:center;background-attachment:scroll;
+  overflow:hidden;
+}
+header::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%, rgba(0,0,0,.55), transparent 60%);pointer-events:none;}
+header h1{position:relative;z-index:1;font-size:clamp(1.5rem,6vw,2.6rem);line-height:1.15;font-weight:800;text-shadow:0 2px 14px rgba(0,0,0,.7);}
+header h1 small{display:block;font-size:.5em;font-weight:400;opacity:.95;margin-top:.4rem;letter-spacing:.5px;}
+
+section{width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(1.2rem,4vw,2.6rem) clamp(.9rem,4vw,1.4rem);}
+h2{color:var(--yellow);font-size:clamp(1.15rem,4.5vw,1.65rem);margin:0 0 .9rem;padding-left:.7rem;border-left:5px solid var(--accent);line-height:1.25;}
+h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
+
+.about-card{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--line);background-color:#04201f;
+  background-image:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.82)), url('nknh-about.jpg');
+  background-size:cover;background-position:center;min-height:220px;
+  display:flex;align-items:flex-end;
+}
+.about-card p{position:relative;z-index:1;padding:clamp(1rem,4vw,1.4rem);font-size:clamp(.92rem,2.6vw,1rem);color:#e9f4f3;text-shadow:0 1px 4px rgba(0,0,0,.85);}
+
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--gap);
+  background:radial-gradient(circle at 10% 10%, rgba(32,178,170,.14), transparent 40%), radial-gradient(circle at 90% 90%, rgba(244,228,0,.07), transparent 40%);
+  padding:var(--gap);border-radius:var(--radius);
+}
+.stat-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem .85rem;text-align:center;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;user-select:none;-webkit-tap-highlight-color:transparent;}
+.stat-card:hover{transform:translateY(-3px);border-color:var(--yellow);background:var(--card-2);}
 .stat-card:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
+.stat-card.active{border-color:var(--yellow);background:var(--card-2);}
 .stat-value{font-size:clamp(1.45rem,5.5vw,2.05rem);font-weight:800;color:var(--yellow);line-height:1.1;letter-spacing:.5px;}
 .stat-label{font-size:clamp(.74rem,2.4vw,.84rem);color:var(--muted);margin-top:.35rem;}
-.stat-more{display:inline-block;margin-top:.55rem;font-size:.72rem;color:var(--teal);font-weight:700;opacity:.95;}
+.stat-more{display:inline-block;margin-top:.55rem;font-size:.72rem;color:var(--accent);font-weight:700;opacity:.95;}
 .stat-detail{grid-column:1/-1;background:var(--card-2);border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:var(--radius);padding:0 1rem;max-height:0;overflow:hidden;opacity:0;transition:max-height .45s ease,opacity .3s,padding .3s;font-size:clamp(.88rem,2.5vw,.96rem);color:#e7ebee;}
-.stat-detail.open{max-height:420px;opacity:1;padding:1rem;}
+.stat-detail.open{max-height:460px;opacity:1;padding:1rem;}
 .stat-detail strong{color:var(--yellow);}
 
-.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;}
-.tag{background:rgba(32,178,170,.16);border:1px solid rgba(32,178,170,.55);color:#d0f4f1;padding:.4rem .75rem;border-radius:999px;font-size:clamp(.74rem,2.4vw,.82rem);font-weight:600;}
-.dir-grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:.8rem;}
-.dir-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;border-top:3px solid var(--teal);}
+.exports-block{border-radius:var(--radius);padding:clamp(.9rem,3vw,1.3rem);border:1px solid var(--line);background:linear-gradient(135deg, rgba(32,178,170,.18), rgba(0,0,0,.2)), var(--card);}
+.dir-grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:.6rem;}
+.dir-card{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;border-top:3px solid var(--accent);}
 .dir-card h3{font-size:1rem;color:var(--yellow);margin-bottom:.4rem;}
-.dir-card p{font-size:.88rem;color:#d3d9dd;}
+.dir-card p{font-size:.88rem;color:#d6dce0;}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem;}
+.tag{background:rgba(32,178,170,.2);border:1px solid rgba(32,178,170,.55);color:#d4f5f2;padding:.4rem .75rem;border-radius:999px;font-size:clamp(.74rem,2.4vw,.82rem);font-weight:600;}
 
 .timeline-wrap{overflow-x:auto;padding:14px 0 18px;margin:0 -4px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
 .timeline-horizontal{display:flex;gap:clamp(22px,5vw,42px);position:relative;padding:16px 18px;min-width:max-content;}
-.timeline-horizontal::before{content:"";position:absolute;top:30px;left:0;right:0;height:3px;background:#3a3a3a;transform:translateY(-50%);z-index:0;}
+.timeline-horizontal::before{content:"";position:absolute;top:30px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--yellow));transform:translateY(-50%);z-index:0;opacity:.5;}
 .timeline-dot{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;min-width:92px;background:none;border:none;color:var(--text);font-family:inherit;-webkit-tap-highlight-color:transparent;}
 .timeline-dot .dot{width:22px;height:22px;border-radius:50%;background:#3a3a3a;border:3px solid #5a5a5a;transition:.3s;}
 .timeline-dot.active .dot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 14px var(--yellow);transform:scale(1.18);}
 .timeline-dot.read .dot{background:var(--teal);border-color:var(--teal);}
 .timeline-dot span{font-size:clamp(.72rem,2.3vw,.84rem);font-weight:700;text-align:center;max-width:96px;line-height:1.2;}
-.period-detail{background-size:cover;background-position:center;background-repeat:no-repeat;background-color:var(--card);border-radius:var(--radius);padding:0 1rem;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .3s;border-left:3px solid var(--yellow);margin-bottom:0;}
+
+.period-detail{position:relative;background-size:cover;background-position:center;background-repeat:no-repeat;background-color:var(--card);border-radius:var(--radius);padding:0 1rem;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .3s;border-left:3px solid var(--yellow);margin-bottom:0;}
+.period-detail::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.84));z-index:0;pointer-events:none;}
+.period-detail > *{position:relative;z-index:1;}
 .period-detail.show{max-height:900px;padding:1rem;margin-bottom:18px;}
-.period-detail p,.period-detail .detail-fact{background:rgba(0,0,0,.78);padding:12px 15px;border-radius:14px;margin-bottom:11px;text-shadow:0 1px 2px #000;backdrop-filter:blur(3px);font-size:clamp(.88rem,2.6vw,.97rem);}
+.period-detail p,.period-detail .detail-fact{background:rgba(0,0,0,.62);padding:12px 15px;border-radius:14px;margin-bottom:11px;text-shadow:0 1px 2px #000;backdrop-filter:blur(4px);font-size:clamp(.88rem,2.6vw,.97rem);}
 .period-detail p:last-child,.period-detail .detail-fact:last-child{margin-bottom:0;}
 .period-detail strong{color:var(--yellow);}
 .detail-fact{font-style:italic;color:var(--yellow);}
-a.back{display:inline-block;margin-top:2rem;background:var(--teal);color:#fff;text-decoration:none;padding:12px 26px;border-radius:999px;font-weight:700;transition:transform .2s,opacity .2s;}
+
+a.back{display:inline-block;margin-top:2rem;background:var(--accent);color:#fff;text-decoration:none;padding:12px 26px;border-radius:999px;font-weight:700;transition:transform .2s,opacity .2s;}
 a.back:hover{transform:translateY(-2px);opacity:.92;}
+
 #detail-1960{background-image:url('nknh1960.jpg');}
 #detail-1970{background-image:url('nknh1970.jpg');}
 #detail-1990{background-image:url('nknh1990.jpg');}
 #detail-2000{background-image:url('nknh2000.jpg');}
 #detail-today{background-image:url('nknhtoday.jpg');}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+
+@media (min-width:1024px){ header{background-attachment:fixed;} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important;scroll-behavior:auto!important;} header{background-attachment:scroll;} }
 </style>
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
 
-<header><h1> НижнекамскНефтехим<small>история флагмана нефтехимии</small></h1></header>
+<header>
+  <h1>⚗️ НижнекамскНефтехим<small>история флагмана нефтехимии</small></h1>
+</header>
 
 <section>
 <h2>О предприятии</h2>
-<p class="description-text">ПАО «Нижнекамскнефтехим» — один из крупнейших производителей нефтехимической продукции в России и Европе. Комбинат стал градообразующим предприятием Нижнекамска и локомотивом отрасли. Сегодня НКНХ выпускает синтетические каучуки, пластики, мономеры и другую продукцию, востребованную по всему миру.</p>
-<img class="hero-photo" src="nknh-hero.jpg" alt="Нижнекамскнефтехим" onerror="this.style.display='none'">
+<div class="about-card">
+  <p>ПАО «Нижнекамскнефтехим» — один из крупнейших производителей нефтехимической продукции в России и Европе. Комбинат стал градообразующим предприятием Нижнекамска и локомотивом отрасли. Сегодня НКНХ выпускает синтетические каучуки, пластики, мономеры и другую продукцию, востребованную по всему миру.</p>
+</div>
 
-<h2> Цифры комбината</h2>
-<p class="description-text" style="margin-bottom:.9rem;">Нажмите на цифру, чтобы узнать подробности.</p>
+<h2>🔢 Цифры комбината</h2>
+<p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на цифру, чтобы узнать подробности.</p>
 <div class="stats-grid">
   <div class="stat-card" tabindex="0" data-info="<strong>1960 год</strong> — принято решение о строительстве комбината. Уже в 1963 году пущена первая установка — производство этилена.">
-    <div class="stat-value" data-target="1960" data-raw="1">1960</div>
-    <div class="stat-label">год основания</div>
-    <div class="stat-more">подробнее →</div>
+    <div class="stat-value">1960</div><div class="stat-label">год основания</div><div class="stat-more">подробнее →</div>
   </div>
   <div class="stat-card" tabindex="0" data-info="<strong>50+ лет</strong> — в 2010 году НКНХ отметил полувековой юбилей пуском комплекса по производству АБС-пластиков.">
-    <div class="stat-value" data-target="50" data-suffix="+">0</div>
-    <div class="stat-label">лет на рынке</div>
-    <div class="stat-more">подробнее →</div>
+    <div class="stat-value" data-target="50" data-suffix="+">0</div><div class="stat-label">лет на рынке</div><div class="stat-more">подробнее →</div>
   </div>
   <div class="stat-card" tabindex="0" data-info="<strong>10 000+ сотрудников</strong> — комбинат остаётся одним из крупнейших работодателей Татарстана и готовит кадры совместно с КНН.">
-    <div class="stat-value" data-target="10000" data-suffix="+">0</div>
-    <div class="stat-label">сотрудников</div>
-    <div class="stat-more">подробнее →</div>
+    <div class="stat-value" data-target="10000" data-suffix="+">0</div><div class="stat-label">сотрудников</div><div class="stat-more">подробнее →</div>
   </div>
   <div class="stat-card" tabindex="0" data-info="<strong>50+ стран</strong> — продукция НКНХ экспортируется в десятки государств Европы, Азии и Ближнего Востока.">
-    <div class="stat-value" data-target="50" data-suffix="+">0</div>
-    <div class="stat-label">стран-экспортёров</div>
-    <div class="stat-more">подробнее →</div>
+    <div class="stat-value" data-target="50" data-suffix="+">0</div><div class="stat-label">стран-экспортёров</div><div class="stat-more">подробнее →</div>
   </div>
   <div class="stat-detail" id="statDetail">Нажмите на цифру ↑</div>
 </div>
 
-<h2> Направления и экспорт</h2>
-<p class="description-text">НКНХ — экспортно ориентированное предприятие. Основные направления поставок и группы продукции:</p>
-
-<div class="dir-grid">
-  <div class="dir-card">
-    <h3>Синтетические каучуки</h3>
-    <p>Одно из ключевых направлений. Продукция идёт на шинные и промышленные заводы Европы, Азии и Ближнего Востока.</p>
+<h2>🌍 Направления и экспорт</h2>
+<div class="exports-block">
+  <p style="color:#dff3f1;">НКНХ — экспортно ориентированное предприятие. Основные направления поставок и группы продукции:</p>
+  <div class="dir-grid">
+    <div class="dir-card"><h3>Синтетические каучуки</h3><p>Одно из ключевых направлений. Продукция идёт на шинные и промышленные заводы Европы, Азии и Ближнего Востока.</p></div>
+    <div class="dir-card"><h3>Пластики и полимеры</h3><p>Полиэтилен, полипропилен, АБС-пластики. Используются в упаковке, строительстве, автопроме и медицине.</p></div>
+    <div class="dir-card"><h3>Мономеры</h3><p>Стирол, этилен, пропилен — сырьё для дальнейшей переработки на предприятиях России и зарубежья.</p></div>
+    <div class="dir-card"><h3>Специальная химия</h3><p>Продукция для лакокрасочной, медицинской и космической отраслей, в том числе уникальные марки.</p></div>
   </div>
-  <div class="dir-card">
-    <h3>Пластики и полимеры</h3>
-    <p>Полиэтилен, полипропилен, АБС-пластики. Используются в упаковке, строительстве, автопроме и медицине.</p>
-  </div>
-  <div class="dir-card">
-    <h3>Мономеры</h3>
-    <p>Стирол, этилен, пропилен — сырьё для дальнейшей переработки на предприятиях России и зарубежья.</p>
-  </div>
-  <div class="dir-card">
-    <h3>Специальная химия</h3>
-    <p>Продукция для лакокрасочной, медицинской и космической отраслей, в том числе уникальные марки.</p>
+  <h3 style="margin-top:1.2rem;color:var(--yellow);font-size:1rem;">Страны-экспортёры</h3>
+  <div class="tags">
+    <span class="tag">Россия</span><span class="tag">Беларусь</span><span class="tag">Казахстан</span><span class="tag">Узбекистан</span><span class="tag">Турция</span><span class="tag">Китай</span><span class="tag">Индия</span><span class="tag">Польша</span><span class="tag">Германия</span><span class="tag">Финляндия</span><span class="tag">Литва</span><span class="tag">Латвия</span><span class="tag">Венгрия</span><span class="tag">Румыния</span><span class="tag">Египет</span><span class="tag">ОАЭ</span>
   </div>
 </div>
 
-<h3 style="margin-top:1.4rem;color:var(--yellow);font-size:1rem;">Страны-экспортёры</h3>
-<div class="tags">
-  <span class="tag">Россия</span>
-  <span class="tag">Беларусь</span>
-  <span class="tag">Казахстан</span>
-  <span class="tag">Узбекистан</span>
-  <span class="tag">Турция</span>
-  <span class="tag">Китай</span>
-  <span class="tag">Индия</span>
-  <span class="tag">Польша</span>
-  <span class="tag">Германия</span>
-  <span class="tag">Финляндия</span>
-  <span class="tag">Литва</span>
-  <span class="tag">Латвия</span>
-  <span class="tag">Венгрия</span>
-  <span class="tag">Румыния</span>
-  <span class="tag">Египет</span>
-  <span class="tag">ОАЭ</span>
-</div>
-
-<h2> Этапы развития комбината</h2>
-<p class="description-text" style="margin-bottom:.9rem;">Нажмите на точку на таймлайне, чтобы раскрыть период.</p>
+<h2>📅 Этапы развития комбината</h2>
+<p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на точку на таймлайне, чтобы раскрыть период.</p>
 
 <div class="timeline-wrap">
   <div class="timeline-horizontal">
@@ -194,8 +203,7 @@ window.addEventListener('scroll', () => {
 function animateCounter(el){
   const target = parseInt(el.dataset.target,10);
   const suffix = el.dataset.suffix || '';
-  const raw = el.dataset.raw === '1';
-  if(raw){ el.textContent = target.toLocaleString('ru-RU') + suffix; return; }
+  if(!el.dataset.target){ return; }
   const dur = 1400, start = performance.now();
   function tick(now){
     const t = Math.min((now-start)/dur,1);
@@ -209,7 +217,7 @@ function animateCounter(el){
 const io = new IntersectionObserver((es,ob)=>{
   es.forEach(en=>{ if(en.isIntersecting){ animateCounter(en.target); ob.unobserve(en.target);} });
 },{threshold:.4});
-document.querySelectorAll('.stat-value').forEach(el=>io.observe(el));
+document.querySelectorAll('.stat-value[data-target]').forEach(el=>io.observe(el));
 
 const statDetail = document.getElementById('statDetail');
 document.querySelectorAll('.stat-card').forEach(card=>{
