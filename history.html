@@ -25,21 +25,46 @@ body{
 }
 img{max-width:100%;display:block;}
 .progress-bar{position:fixed;top:0;left:0;height:4px;width:0%;background:linear-gradient(90deg,var(--yellow),var(--green));z-index:1000;transition:width .12s linear;}
+
+/* ШАПКА: фото видно, затемнение только вокруг текста */
 header{
-  position:relative;min-height:clamp(240px,44vh,440px);
-  display:flex;align-items:center;justify-content:center;text-align:center;
+  position:relative;
+  min-height:clamp(240px,46vh,440px);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
   padding:clamp(2rem,6vw,3.5rem) 1rem;
   padding-top:calc(clamp(2rem,6vw,3.5rem) + env(safe-area-inset-top));
   background-color:#123a28;
   background-image:
-    linear-gradient(135deg, rgba(10,143,60,.72), rgba(22,119,179,.5) 55%, rgba(0,0,0,.8)),
+    linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.32)),
     url('city-hero.jpg');
-  background-size:cover;background-position:center;background-repeat:no-repeat;
-  background-attachment:scroll;overflow:hidden;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  overflow:hidden;
 }
-header::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%, rgba(0,0,0,.55), transparent 60%);pointer-events:none;}
-header h1{position:relative;z-index:1;font-size:clamp(1.5rem,6vw,2.6rem);line-height:1.15;font-weight:800;text-shadow:0 2px 14px rgba(0,0,0,.75);}
-header h1 small{display:block;font-size:.5em;font-weight:400;opacity:.95;margin-top:.4rem;letter-spacing:.5px;}
+/* лёгкая виньетка по краям, центр (фото) не перекрывает */
+header::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.45) 100%);
+  pointer-events:none;
+}
+header h1{
+  position:relative;z-index:1;
+  font-size:clamp(1.5rem,6vw,2.6rem);
+  line-height:1.15;font-weight:800;
+  padding:.5em .8em;
+  border-radius:18px;
+  /* затемнение только под текстом, мягкое */
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.45), rgba(0,0,0,.15) 70%, transparent 100%);
+  text-shadow:0 2px 12px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+  color:#fff;
+}
+header h1 small{
+  display:block;font-size:.5em;font-weight:400;
+  opacity:.95;margin-top:.4rem;letter-spacing:.5px;
+}
+
 section{width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(1.2rem,4vw,2.6rem) clamp(.9rem,4vw,1.4rem);}
 h2{color:var(--yellow);font-size:clamp(1.15rem,4.5vw,1.65rem);margin:0 0 .9rem;padding-left:.7rem;border-left:5px solid var(--accent);line-height:1.25;}
 h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
@@ -103,13 +128,13 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
-<header><h1>📜 Нижнекамск<small>страницы истории</small></h1></header>
+<header><h1>Нижнекамск<small>страницы истории</small></h1></header>
 <section>
 <h2>О городе</h2>
 <div class="about-card"><p>Нижнекамск — один из крупнейших промышленных центров Татарстана, город химиков, нефтепереработчиков и строителей. Основан в 1961 году как молодой город при нефтехимическом комбинате. Сегодня это современный город с развитой инфраструктурой, парками и уникальной атмосферой.</p></div>
 <img class="hero-photo" src="flag.png" alt="Флаг Нижнекамска" onerror="this.style.display='none'">
 
-<h2>🔢 Цифры эпохи</h2>
+<h2>Цифры эпохи</h2>
 <p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на цифру, чтобы узнать подробности.</p>
 <div class="stats-grid">
   <div class="stat-card" tabindex="0" data-info="<strong>1961 год</strong> — 25 августа основан рабочий посёлок Нижнекамский. В 1966 году он получил статус города.">
@@ -123,7 +148,7 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
   <div class="stat-detail" id="statDetail">Нажмите на цифру ↑</div>
 </div>
 
-<h2>🌍 Направления и экспорт</h2>
+<h2>Направления и экспорт</h2>
 <div class="exports-block">
   <p style="color:#dfe6ea;">Нижнекамск — экспортно ориентированный промышленный узел. Продукция города востребована в десятках стран.</p>
   <div class="dir-grid">
@@ -138,7 +163,7 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
   </div>
 </div>
 
-<h2>📅 Интерактивная хроника</h2>
+<h2>Интерактивная хроника</h2>
 <p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на точку на таймлайне, чтобы раскрыть период.</p>
 <div class="timeline-wrap">
   <div class="timeline-horizontal">
@@ -152,23 +177,23 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
 
 <div id="detail-1960" class="period-detail">
   <p><strong>Как всё начиналось:</strong> 25 августа 1961 года основан рабочий посёлок Нижнекамский. Первый камень заложили комсомольцы-энтузиасты. Строительство комбината стало всесоюзной ударной стройкой. Первые дома вырастали в чистом поле, а к концу десятилетия здесь жили тысячи молодых специалистов.</p>
-  <div class="detail-fact">✨ В 1966 году посёлок получил статус города, население превысило 30 тысяч человек.</div>
+  <div class="detail-fact">В 1966 году посёлок получил статус города, население превысило 30 тысяч человек.</div>
 </div>
 <div id="detail-1970" class="period-detail">
   <p><strong>Эпоха гигантов:</strong> В 70-е Нижнекамск стал крупнейшим промышленным узлом. Запущены мощности «Нижнекамскнефтехима», построены шинный завод, ТЭЦ-1 и ТЭЦ-2. Город застраивался микрорайонами: проспекты Химиков, Строителей, Дружбы. В 1975 году жителей стало больше 100 тысяч.</p>
-  <div class="detail-fact">✨ В 1970-х Нижнекамск прозвали «городом молодожёнов».</div>
+  <div class="detail-fact">В 1970-х Нижнекамск прозвали «городом молодожёнов».</div>
 </div>
 <div id="detail-1990" class="period-detail">
   <p><strong>Испытание временем:</strong> 90-е стали серьёзным вызовом. Промышленность переживала кризис, но градообразующие предприятия выстояли. Началось развитие малого бизнеса, построены первые торговые центры.</p>
-  <div class="detail-fact">✨ В 1997 году Нижнекамск занял первое место в республике по вводу жилья на душу населения.</div>
+  <div class="detail-fact">В 1997 году Нижнекамск занял первое место в республике по вводу жилья на душу населения.</div>
 </div>
 <div id="detail-2000" class="period-detail">
   <p><strong>Технологический рывок:</strong> В новом тысячелетии город вошёл в число лидеров российской нефтехимии. Появились новые школы, спорткомплексы, набережная Камы. В 2005 году отметили 40-летие, открылся парк «Солнечная поляна».</p>
-  <div class="detail-fact">✨ В 2007 году Нижнекамск признан самым благоустроенным городом Татарстана.</div>
+  <div class="detail-fact">В 2007 году Нижнекамск признан самым благоустроенным городом Татарстана.</div>
 </div>
 <div id="detail-today" class="period-detail">
   <p><strong>Город возможностей:</strong> Сегодня Нижнекамск — более 240 тысяч жителей, мощный промышленный кластер. Строятся жилые комплексы, открыты IT-лицей, обновлённый пляж, лыжно-биатлонный комплекс. В 2021 году город отпраздновал 60-летие.</p>
-  <div class="detail-fact">✨ Нижнекамск — один из немногих городов России с естественным приростом населения.</div>
+  <div class="detail-fact">Нижнекамск — один из немногих городов России с естественным приростом населения.</div>
 </div>
 <a class="back" href="index.html">← На главную</a>
 </section>
