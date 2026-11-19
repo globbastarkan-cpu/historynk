@@ -74,4 +74,144 @@ h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
 .timeline-dot{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;min-width:92px;background:none;border:none;color:var(--text);font-family:inherit;-webkit-tap-highlight-color:transparent;}
 .timeline-dot .dot{width:22px;height:22px;border-radius:50%;background:#3a3a3a;border:3px solid #5a5a5a;transition:.3s;}
 .timeline-dot.active .dot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 14px var(--yellow);transform:scale(1.18);}
-.timeline-dot.read .dot{background:var(--burgundy);border-color:var(--burg
+.timeline-dot.read .dot{background:var(--burgundy);border-color:var(--burgundy);}
+.timeline-dot span{font-size:clamp(.72rem,2.3vw,.84rem);font-weight:700;text-align:center;max-width:96px;line-height:1.2;}
+.period-detail{position:relative;background-size:cover;background-position:center;background-repeat:no-repeat;background-color:var(--card);border-radius:var(--radius);padding:0 1rem;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .3s;border-left:3px solid var(--yellow);margin-bottom:0;}
+.period-detail::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.84));z-index:0;pointer-events:none;}
+.period-detail > *{position:relative;z-index:1;}
+.period-detail.show{max-height:900px;padding:1rem;margin-bottom:18px;}
+.period-detail p,.period-detail .detail-fact{background:rgba(0,0,0,.62);padding:12px 15px;border-radius:14px;margin-bottom:11px;text-shadow:0 1px 2px #000;backdrop-filter:blur(4px);font-size:clamp(.88rem,2.6vw,.97rem);}
+.period-detail p:last-child,.period-detail .detail-fact:last-child{margin-bottom:0;}
+.period-detail strong{color:var(--yellow);}
+.detail-fact{font-style:italic;color:var(--yellow);}
+a.back{display:inline-block;margin-top:2rem;background:var(--accent);color:#fff;text-decoration:none;padding:12px 26px;border-radius:999px;font-weight:700;transition:transform .2s,opacity .2s;}
+a.back:hover{transform:translateY(-2px);opacity:.92;}
+#detail-1963{background-image:url('knn1963.jpg');}
+#detail-1980{background-image:url('knn1980.jpg');}
+#detail-1995{background-image:url('knn1995.jpg');}
+#detail-2010{background-image:url('knn2010.jpg');}
+#detail-today{background-image:url('knntoday.jpg');}
+@media (min-width:1024px){header{background-attachment:fixed;}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important;}header{background-attachment:scroll;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<header><h1>История КНН<small>Колледж нефтехимии и нефтепереработки им. Н.В. Лемаева</small></h1></header>
+<section>
+<h2>О колледже</h2>
+<div class="about-card"><p>Колледж нефтехимии и нефтепереработки (КНН) — ведущее учебное заведение Татарстана, готовящее кадры для нефтехимической отрасли. Основан в 1960-х для обеспечения Нижнекамского нефтехимического комбината квалифицированными рабочими и техниками. Носит имя Николая Васильевича Лемаева.</p></div>
+
+<h2>Цифры колледжа</h2>
+<p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на цифру, чтобы узнать подробности.</p>
+<div class="stats-grid">
+  <div class="stat-card" tabindex="0" data-info="<strong>1963 год</strong> — при комбинате открыто ГПТУ-94. Первый набор — 300 учащихся.">
+    <div class="stat-value">1963</div><div class="stat-label">год основания</div><div class="stat-more">подробнее →</div></div>
+  <div class="stat-card" tabindex="0" data-info="<strong>1500+ студентов</strong> — сегодня обучаются по 6 направлениям подготовки.">
+    <div class="stat-value" data-target="1500" data-suffix="+">0</div><div class="stat-label">студентов</div><div class="stat-more">подробнее →</div></div>
+  <div class="stat-card" tabindex="0" data-info="<strong>6 направлений</strong> — химическая технология, нефтегазовое дело, автоматизация, экономика, бухучёт, рабочие специальности.">
+    <div class="stat-value" data-target="6">0</div><div class="stat-label">направлений</div><div class="stat-more">подробнее →</div></div>
+  <div class="stat-card" tabindex="0" data-info="<strong>Топ-100 СПО</strong> — в 2023 году колледж вошёл в топ-100 лучших организаций СПО России.">
+    <div class="stat-value" data-target="100">0</div><div class="stat-label">место в топ-100 СПО</div><div class="stat-more">подробнее →</div></div>
+  <div class="stat-detail" id="statDetail">Нажмите на цифру ↑</div>
+</div>
+
+<h2>Партнёры и направления</h2>
+<div class="exports-block">
+  <p style="color:#e6dede;">Колледж готовит кадры для крупнейших предприятий нефтехимии. Выпускники востребованы в России и за рубежом.</p>
+  <div class="dir-grid">
+    <div class="dir-card"><h3>Химическая технология</h3><p>Аппаратчики и технологи для НКНХ, ТАНЕКО и СИБУРа.</p></div>
+    <div class="dir-card"><h3>Нефтегазовое дело</h3><p>Переработка углеводородов, эксплуатация оборудования.</p></div>
+    <div class="dir-card"><h3>Автоматизация</h3><p>Цифровые системы управления производством.</p></div>
+    <div class="dir-card"><h3>Экономика и учёт</h3><p>Экономисты и бухгалтеры для промышленности.</p></div>
+  </div>
+  <h3 style="margin-top:1.2rem;color:var(--yellow);font-size:1rem;">География трудоустройства</h3>
+  <div class="tags">
+    <span class="tag">Татарстан</span><span class="tag">Казань</span><span class="tag">Нижнекамск</span><span class="tag">Москва</span><span class="tag">Санкт-Петербург</span><span class="tag">Башкортостан</span><span class="tag">Самарская область</span><span class="tag">Тюменская область</span><span class="tag">Казахстан</span><span class="tag">Беларусь</span><span class="tag">Узбекистан</span>
+  </div>
+</div>
+
+<h2>Этапы развития колледжа</h2>
+<p style="margin-bottom:.9rem;color:var(--muted);">Нажмите на точку на таймлайне, чтобы раскрыть период.</p>
+<div class="timeline-wrap">
+  <div class="timeline-horizontal">
+    <button class="timeline-dot" data-id="1963" onclick="openPeriod('1963')"><span class="dot"></span><span>1963<br>основание</span></button>
+    <button class="timeline-dot" data-id="1980" onclick="openPeriod('1980')"><span class="dot"></span><span>1980-е<br>становление</span></button>
+    <button class="timeline-dot" data-id="1995" onclick="openPeriod('1995')"><span class="dot"></span><span>1995<br>колледж</span></button>
+    <button class="timeline-dot" data-id="2010" onclick="openPeriod('2010')"><span class="dot"></span><span>2010-е<br>модернизация</span></button>
+    <button class="timeline-dot" data-id="today" onclick="openPeriod('today')"><span class="dot"></span><span>Сегодня</span></button>
+  </div>
+</div>
+
+<div id="detail-1963" class="period-detail">
+  <p><strong>Первые шаги:</strong> В 1963 году при комбинате открыто ГПТУ-94 (позже ставшее КНН). Первый набор — 300 учащихся. Готовили аппаратчиков, слесарей, лаборантов.</p>
+  <div class="detail-fact">Первый директор — В.И. Панкратов, ветеран Великой Отечественной войны.</div>
+</div>
+<div id="detail-1980" class="period-detail">
+  <p><strong>Расцвет ПТУ:</strong> Построен новый учебный корпус, мастерские, общежитие. В 1986 году присвоен статус СПТУ № 94. Выпускники работают на ключевых производствах.</p>
+  <div class="detail-fact">Училище награждено переходящим Красным знаменем ЦК ВЛКСМ.</div>
+</div>
+<div id="detail-1995" class="period-detail">
+  <p><strong>Новый статус:</strong> В 1995 году училище преобразовано в «Нижнекамский нефтехимический колледж». Введены специальности: экономика, бухучёт, автоматизация.</p>
+  <div class="detail-fact">В 1998 году колледж возглавил З.Ф. Ганиев, заслуженный учитель РТ.</div>
+</div>
+<div id="detail-2010" class="period-detail">
+  <p><strong>Цифровая эпоха:</strong> Открыты лаборатории с современным оборудованием, внедрены дуальные программы. В 2015 году присвоено имя Н.В. Лемаева.</p>
+  <div class="detail-fact">Студенты колледжа неоднократно побеждали в чемпионатах WorldSkills.</div>
+</div>
+<div id="detail-today" class="period-detail">
+  <p><strong>Современный колледж:</strong> КНН — это 1500 студентов, 6 направлений, современные мастерские и цифровые лаборатории. Колледж — базовая площадка подготовки кадров для СИБУРа.</p>
+  <div class="detail-fact">В 2023 году колледж вошёл в топ-100 лучших организаций СПО России.</div>
+</div>
+<a class="back" href="index.html">← На главную</a>
+</section>
+<script>
+window.addEventListener('scroll', () => {
+  const st = window.pageYOffset;
+  const dh = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressBar').style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
+}, {passive:true});
+function animateCounter(el){
+  const target = parseInt(el.dataset.target,10);
+  const suffix = el.dataset.suffix || '';
+  if(!el.dataset.target){ return; }
+  const dur = 1400, start = performance.now();
+  function tick(now){
+    const t = Math.min((now-start)/dur,1);
+    const e = 1 - Math.pow(1-t,3);
+    el.textContent = Math.round(target*e).toLocaleString('ru-RU') + suffix;
+    if(t<1) requestAnimationFrame(tick);
+    else el.textContent = target.toLocaleString('ru-RU') + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+const io = new IntersectionObserver((es,ob)=>{es.forEach(en=>{if(en.isIntersecting){animateCounter(en.target);ob.unobserve(en.target);}});},{threshold:.4});
+document.querySelectorAll('.stat-value[data-target]').forEach(el=>io.observe(el));
+const statDetail = document.getElementById('statDetail');
+document.querySelectorAll('.stat-card').forEach(card=>{
+  const open = ()=>{
+    document.querySelectorAll('.stat-card').forEach(c=>c.classList.remove('active'));
+    card.classList.add('active');
+    statDetail.innerHTML = card.dataset.info;
+    statDetail.classList.add('open');
+    statDetail.scrollIntoView({behavior:'smooth',block:'nearest'});
+  };
+  card.addEventListener('click', open);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); }});
+});
+function openPeriod(id){
+  const detail = document.getElementById('detail-'+id);
+  const dot = document.querySelector(`.timeline-dot[data-id="${id}"]`);
+  if(!detail) return;
+  if(detail.classList.contains('show')){
+    detail.classList.remove('show'); dot.classList.remove('active');
+  } else {
+    document.querySelectorAll('.period-detail').forEach(d=>d.classList.remove('show'));
+    document.querySelectorAll('.timeline-dot').forEach(d=>d.classList.remove('active'));
+    detail.classList.add('show'); dot.classList.add('active'); dot.classList.add('read');
+    setTimeout(()=>detail.scrollIntoView({behavior:'smooth',block:'center'}),100);
+  }
+}
+</script>
+</body>
+</html>
