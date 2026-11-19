@@ -26,26 +26,27 @@ header{
   padding-top:calc(clamp(2rem,6vw,3.5rem) + env(safe-area-inset-top));
   background-color:#062a28;
   background-image:
-    linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.34)),
+    linear-gradient(135deg, rgba(32,178,170,.7), rgba(6,60,58,.72) 55%, rgba(0,0,0,.8)),
     url('nknh-hero.jpg');
-  background-size:cover;background-position:center;background-repeat:no-repeat;overflow:hidden;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  background-attachment:scroll;overflow:hidden;
 }
-header::after{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.45) 100%);
-  pointer-events:none;
-}
-header h1{
-  position:relative;z-index:1;
-  font-size:clamp(1.5rem,6vw,2.6rem);line-height:1.15;font-weight:800;
-  padding:.5em .8em;border-radius:18px;
-  background:radial-gradient(ellipse at center, rgba(0,0,0,.45), rgba(0,0,0,.15) 70%, transparent 100%);
-  text-shadow:0 2px 12px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
-  color:#fff;
-}
+header::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%, rgba(0,0,0,.55), transparent 60%);pointer-events:none;}
+header h1{position:relative;z-index:1;font-size:clamp(1.5rem,6vw,2.6rem);line-height:1.15;font-weight:800;text-shadow:0 2px 14px rgba(0,0,0,.75);}
 header h1 small{display:block;font-size:.5em;font-weight:400;opacity:.95;margin-top:.4rem;letter-spacing:.5px;}
 
-section{width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(1.2rem,4vw,2.6rem) clamp(.9rem,4vw,1.4rem);}
+.hero-continuation{
+  position:relative;height:clamp(140px,28vh,260px);
+  background-color:#062a28;
+  background-image:
+    linear-gradient(180deg, rgba(32,178,170,.5), rgba(20,24,28,.85) 70%, var(--dark) 100%),
+    url('nknh-hero.jpg');
+  background-size:cover;background-position:center 30%;background-repeat:no-repeat;
+  background-attachment:scroll;overflow:hidden;
+}
+.hero-continuation::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, transparent 0%, rgba(20,24,28,.35) 55%, var(--dark) 100%);pointer-events:none;}
+
+section{width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(1.2rem,4vw,2.6rem) clamp(.9rem,4vw,1.4rem);position:relative;margin-top:calc(-1 * clamp(60px,12vh,110px));}
 h2{color:var(--yellow);font-size:clamp(1.15rem,4.5vw,1.65rem);margin:0 0 .9rem;padding-left:.7rem;border-left:5px solid var(--accent);line-height:1.25;}
 h2:not(:first-child){margin-top:clamp(1.6rem,4vw,2.4rem);}
 .about-card{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background-color:#04201f;background-image:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.82)), url('nknh-about.jpg');background-size:cover;background-position:center;min-height:220px;display:flex;align-items:flex-end;}
@@ -97,7 +98,10 @@ a.back:hover{transform:translateY(-2px);opacity:.92;}
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
+
 <header><h1>НижнекамскНефтехим<small>история флагмана нефтехимии</small></h1></header>
+<div class="hero-continuation" aria-hidden="true"></div>
+
 <section>
 <h2>О предприятии</h2>
 <div class="about-card"><p>ПАО «Нижнекамскнефтехим» — один из крупнейших производителей нефтехимической продукции в России и Европе. Комбинат стал градообразующим предприятием Нижнекамска и локомотивом отрасли. Сегодня НКНХ выпускает синтетические каучуки, пластики, мономеры и другую продукцию, востребованную по всему миру.</p></div>
