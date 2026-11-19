@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>История НКНХ — нефтехимический гигант</title>
+<style>
+:root{--blue:#005a9c; --orange:#f39200; --yellow:#f4e400; --dark:#1a1a1a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Roboto,sans-serif;background:var(--dark);color:#fff;line-height:1.5;}
+.progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--yellow),var(--orange));width:0%;z-index:999;transition:width 0.1s;}
+header{background:linear-gradient(120deg,var(--blue),#003a66);padding:clamp(1.5rem, 5vw, 2.5rem) 1rem;text-align:center;}
+h1{font-size:clamp(1.5rem, 6vw, 2.2rem);}
+.sound-btn{position:fixed;bottom:20px;right:20px;width:55px;height:55px;border-radius:50%;background:var(--blue);border:none;font-size:24px;cursor:pointer;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.5);transition:0.3s;}
+.sound-btn:hover{transform:scale(1.1);}
+.sound-btn.off{background:#555;}
+section{max-width:1000px;margin:0 auto;padding:clamp(1.5rem, 5vw, 3rem) 1rem;}
+h2{color:var(--yellow);margin-bottom:1rem;font-size:clamp(1.4rem, 5vw, 1.8rem);border-left:5px solid var(--orange);padding-left:0.8rem;}
+.description-text{background:rgba(255,255,255,0.05);padding:1rem;border-radius:20px;margin-bottom:1.8rem;}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:2rem;}
+.stat-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:1.1rem 0.8rem;text-align:center;transition:transform .3s, border-color .3s;}
+.stat-card:hover{transform:translateY(-4px);border-color:var(--yellow);}
+.stat-value{font-size:clamp(1.5rem,5vw,2.1rem);font-weight:800;color:var(--yellow);letter-spacing:.5px;line-height:1.1;}
+.stat-label{font-size:.8rem;opacity:.85;margin-top:.4rem;}
+
+.map-block{margin-bottom:2rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:1rem;}
+.map-svg{width:100%;height:auto;display:block;border-radius:14px;background:#101010;touch-action:manipulation;}
+.map-shape{fill:#1e3a4a;stroke:#4a7a9a;stroke-width:2;cursor:pointer;transition:fill .25s, stroke .25s;}
+.map-shape:hover{fill:#2a4f63;stroke:var(--yellow);}
+.map-shape.active{fill:var(--orange);stroke:var(--yellow);stroke-width:3;}
+.map-label{fill:#a8cce0;font-size:13px;font-weight:600;pointer-events:none;text-anchor:middle;}
+.map-caption{margin-top:.8rem;min-height:2.6em;background:rgba(0,0,0,0.5);border-radius:12px;padding:.7rem .9rem;font-size:.92rem;border-left:3px solid var(--yellow);}
+.map-caption strong{color:var(--yellow);}
+.map-hint{font-size:.8rem;opacity:.6;margin-bottom:.6rem;}
+
+.timeline-wrap{overflow-x:auto;padding:20px 0;margin-bottom:20px;scrollbar-width:thin;}
+.timeline-horizontal{display:flex;gap:40px;position:relative;padding:20px 30px;min-width:max-content;}
+.timeline-horizontal::before{content:"";position:absolute;top:50%;left:0;right:0;height:3px;background:#444;transform:translateY(-50%);z-index:0;}
+.timeline-dot{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;min-width:100px;background:none;border:none;color:#fff;font-family:inherit;}
+.timeline-dot .dot{width:24px;height:24px;border-radius:50%;background:#444;border:3px solid #666;transition:0.3s;}
+.timeline-dot.active .dot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 15px var(--yellow);transform:scale(1.2);}
+.timeline-dot.read .dot{background:var(--orange);border-color:var(--orange);}
+.timeline-dot span{font-size:0.85rem;font-weight:bold;text-align:center;max-width:90px;}
+.period-detail{position:relative;background-size:cover;background-position:center;background-repeat:no-repeat;border-radius:16px;padding:0 1rem;max-height:0;overflow:hidden;transition:max-height 0.5s ease-out, padding 0.3s;border-left:2px solid var(--yellow);margin-bottom:0;background-color:#1a1a1a;}
+.period-detail.show{max-height:700px;padding:1rem;margin-bottom:20px;}
+.period-detail p, .period-detail .detail-fact{background:rgba(0,0,0,0.78);padding:12px 16px;border-radius:16px;margin-bottom:12px;text-shadow:0 1px 2px black;backdrop-filter:blur(2px);}
+.period-detail p:last-child, .period-detail .detail-fact:last-child{margin-bottom:0;}
+.period-detail strong{color:var(--yellow);}
+.detail-fact{font-style:italic;color:var(--yellow);border-top:none;}
+a.back{display:inline-block;margin-top:2rem;background:var(--blue);color:white;text-decoration:none;padding:12px 28px;border-radius:40px;font-weight:bold;}
+#detail-1960{background-image:url('nknh1960.jpg');}
+#detail-1970{background-image:url('nknh1970.jpg');}
+#detail-1990{background-image:url('nknh1990.jpg');}
+#detail-2000{background-image:url('nknh2000.jpg');}
+#detail-today{background-image:url('nknh_today.jpg');}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<button class="sound-btn" id="soundBtn" onclick="toggleSound()" title="Включить/выключить звук">🔇</button>
+
+<header><h1>🏭 НКНХ: история нефтехимического гиганта</h1></header>
+
+<section>
+<h2>О предприятии</h2>
+<p class="description-text">ПАО «Нижнекамскнефтехим» (НКНХ) — крупнейший производитель синтетического каучука, пластиков и других нефтехимических продуктов в России и Восточной Европе. Комбинат был основан в 1960-х годах и стал градообразующим предприятием Нижнекамска, определившим его развитие на десятилетия вперёд.</p>
+
+<h2>🔢 Цифры предприятия</h2>
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-value" data-target="1960">0</div><div class="stat-label">год основания</div></div>
+  <div class="stat-card"><div class="stat-value" data-target="20000" data-suffix="+">0</div><div class="stat-label">сотрудников</div></div>
+  <div class="stat-card"><div class="stat-value" data-target="120" data-suffix="+">0</div><div class="stat-label">видов продукции</div></div>
+  <div class="stat-card"><div class="stat-value" data-target="60" data-suffix="+">0</div><div class="stat-label">стран-экспортёров</div></div>
+</div>
+
+<h2>🗺️ Схема производств</h2>
+<div class="map-block">
+  <p class="map-hint">Нажмите на объект, чтобы узнать о нём:</p>
+  <svg class="map-svg" viewBox="0 0 600 320" role="img" aria-label="Схема производств НКНХ">
+    <rect x="0" y="0" width="600" height="320" fill="#101010"/>
+    <!-- трубы -->
+    <path d="M120,60 L120,260 M300,60 L300,260 M480,60 L480,260" stroke="#2a4a5a" stroke-width="2" opacity="0.5"/>
+    <!-- Объекты -->
+    <path class="map-shape" data-name="Завод синтетического каучука" data-info="<strong>Завод синтетического каучука</strong> — первое крупное производство комбината. Здесь выпускают изопреновый и бутадиеновый каучук, востребованный во всём мире." d="M40,60 L220,60 L220,170 L40,170 Z"/>
+    <path class="map-shape" data-name="Завод пластиков" data-info="<strong>Завод пластиков</strong> — производство полиэтилена, полипропилена и других полимеров. Продукция используется в строительстве, упаковке и машиностроении." d="M260,60 L440,60 L440,170 L260,170 Z"/>
+    <path class="map-shape" data-name="Этиленовый комплекс" data-info="<strong>Этиленовый комплекс</strong> — сердце комбината: установки пиролиза и газоразделения обеспечивают сырьём все остальные производства." d="M40,200 L220,200 L220,310 L40,310 Z"/>
+    <path class="map-shape" data-name="Центральная лаборатория" data-info="<strong>Центральная заводская лаборатория</strong> — научно-исследовательский центр, где разрабатываются новые марки каучуков и полимеров." d="M260,200 L440,200 L440,310 L260,310 Z"/>
+    <path class="map-shape" data-name="Причал на Каме" data-info="<strong>Причал на реке Каме</strong> — собственный речной порт для отгрузки продукции водным транспортом и приёма сырья." d="M480,200 L570,200 L570,310 L480,310 Z"/>
+    <text class="map-label" x="130" y="120">Синт. каучук</text>
+    <text class="map-label" x="350" y="120">Завод пластиков</text>
+    <text class="map-label" x="130" y="260">Этилен</text>
+    <text class="map-label" x="350" y="260">Лаборатория</text>
+    <text class="map-label" x="525" y="260">Причал</text>
+  </svg>
+  <div class="map-caption" id="mapCaption">Выберите объект на схеме ↑</div>
+</div>
+
+<h2>📅 Вехи истории</h2>
+<p style="margin-bottom:1rem;">Нажмите на точку на таймлайне, чтобы узнать подробности:</p>
+
+<div class="timeline-wrap">
+  <div class="timeline-horizontal" id="timeline">
+    <button class="timeline-dot" data-id="1960" onclick="openPeriod('1960')"><span class="dot"></span><span>1960-е<br>первый каучук</span></button>
+    <button class="timeline-dot" data-id="1970" onclick="openPeriod('1970')"><span class="dot"></span><span>1970-е<br>расширение</span></button>
+    <button class="timeline-dot" data-id="1990" onclick="openPeriod('1990')"><span class="dot"></span><span>1990-е<br>акционирование</span></button>
+    <button class="timeline-dot" data-id="2000" onclick="openPeriod('2000')"><span class="dot"></span><span>2000-е<br>модернизация</span></button>
+    <button class="timeline-dot" data-id="today" onclick="openPeriod('today')"><span class="dot"></span><span>Сегодня</span></button>
+  </div>
+</div>
+
+<div id="detail-1960" class="period-detail">
+  <p><strong>Первый каучук:</strong> В 1964 году на Нижнекамском нефтехимическом комбинате был получен первый синтетический каучук. Это событие положило начало масштабному развитию нефтехимии в регионе. Завод строился ударными темпами, и уже к концу десятилетия предприятие выпускало продукцию для шинной промышленности.</p>
+  <div class="detail-fact">✨ Первый каучук был получен на установке, смонтированной комсомольцами-добровольцами из разных республик СССР.</div>
+</div>
+<div id="detail-1970" class="period-detail">
+  <p><strong>Расширение производства:</strong> В 70-е годы комбинат превратился в крупнейший нефтехимический комплекс Европы. Запущены производства изопрена, полиизопренового каучука, этилена. В 1976 году начал работу завод по производству пластиков. НКНХ стал основным поставщиком каучука для шинных заводов страны.</p>
+  <div class="detail-fact">✨ К 1979 году комбинат выпускал более 100 наименований продукции, а численность работающих превысила 10 тысяч человек.</div>
+</div>
+<div id="detail-1990" class="period-detail">
+  <p><strong>Акционирование и вызовы:</strong> В 1993 году предприятие было преобразовано в открытое акционерное общество «Нижнекамскнефтехим». Несмотря на экономический кризис, комбинат сохранил рабочие места и продолжил выпуск продукции, выйдя на международные рынки. В 1998 году началась реконструкция производств.</p>
+  <div class="detail-fact">✨ В 1995 году НКНХ получил международный сертификат качества ISO 9001.</div>
+</div>
+<div id="detail-2000" class="period-detail">
+  <p><strong>Модернизация и рост:</strong> В 2000-х годах проведена масштабная техническая модернизация. Построены новые установки по производству полипропилена и полиэтилена, расширена номенклатура каучуков. Предприятие стало экспортировать продукцию более чем в 50 стран мира. Начато строительство комплекса глубокой переработки нефти ТАНЕКО.</p>
+  <div class="detail-fact">✨ В 2010 году НКНХ вошёл в число 10 крупнейших производителей синтетического каучука в мире.</div>
+</div>
+<div id="detail-today" class="period-detail">
+  <p><strong>Сегодняшний день:</strong> Сегодня «Нижнекамскнефтехим» — это более 20 тысяч сотрудников, современные производства и продукция, востребованная в 60+ странах. В 2020-х продолжается модернизация мощностей и внедрение цифровых технологий. Комбинат остаётся градообразующим предприятием и флагманом российской нефтехимии.</p>
+  <div class="detail-fact">✨ В 2021 году НКНХ отметил 55-летие с момента получения первого каучука и продолжает наращивать выпуск импортозамещающей продукции.</div>
+</div>
+
+<a class="back" href="index.html">← На главную</a>
+</section>
+
+<script>
+/* ===== Прогресс ===== */
+window.addEventListener('scroll', () => {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progressBar').style.width = progress + '%';
+});
+
+/* ===== Счётчики ===== */
+function animateCounter(el){
+  const target = parseInt(el.dataset.target, 10);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1500;
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const value = Math.round(target * eased);
+    el.textContent = value.toLocaleString('ru-RU') + suffix;
+    if(t < 1) requestAnimationFrame(tick);
+    else el.textContent = target.toLocaleString('ru-RU') + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+const statsObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      animateCounter(entry.target);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stat-value').forEach(el => statsObserver.observe(el));
+
+/* ===== Карта ===== */
+const mapCaption = document.getElementById('mapCaption');
+document.querySelectorAll('.map-shape').forEach(shape => {
+  shape.addEventListener('click', () => {
+    document.querySelectorAll('.map-shape').forEach(s => s.classList.remove('active'));
+    shape.classList.add('active');
+    mapCaption.innerHTML = shape.dataset.info || 'Нет данных';
+    playClickSound();
+  });
+});
+
+/* ===== Таймлайн ===== */
+function openPeriod(id){
+  const detail = document.getElementById('detail-' + id);
+  const dot = document.querySelector(`.timeline-dot[data-id="${id}"]`);
+  if(!detail) return;
+  if(detail.classList.contains('show')){
+    detail.classList.remove('show');
+    dot.classList.remove('active');
+  } else {
+    document.querySelectorAll('.period-detail').forEach(d => d.classList.remove('show'));
+    document.querySelectorAll('.timeline-dot').forEach(d => d.classList.remove('active'));
+    detail.classList.add('show');
+    dot.classList.add('active');
+    dot.classList.add('read');
+    playClickSound();
+    setTimeout(() => detail.scrollIntoView({behavior:'smooth', block:'center'}), 100);
+  }
+}
+
+/* ===== Звук ===== */
+let audioCtx = null, soundOn = false, ambientSource = null;
+function toggleSound(){
+  const btn = document.getElementById('soundBtn');
+  if(!soundOn){
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    const bufferSize = 2 * audioCtx.sampleRate;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for(let i = 0; i < bufferSize; i++) data[i] = (Math.random()*2-1)*0.05;
+    ambientSource = audioCtx.createBufferSource();
+    ambientSource.buffer = buffer;
+    ambientSource.loop = true;
+    const gainNode = audioCtx.createGain();
+    gainNode.gain.value = 0.08;
+    ambientSource.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    ambientSource.start();
+    soundOn = true;
+    btn.textContent = '🔊';
+    btn.classList.remove('off');
+  } else {
+    if(ambientSource){ ambientSource.stop(); ambientSource = null; }
+    soundOn = false;
+    btn.textContent = '🔇';
+    btn.classList.add('off');
+  }
+}
+function playClickSound(){
+  if(!soundOn || !audioCtx) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.frequency.value = 600; osc.type = 'sine';
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+}
+</script>
+</body>
+</html>

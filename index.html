@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>История Нижнекамска — интерактивный портал</title>
+<style>
+:root{
+  --bg:#000;
+  --text:#fff;
+  --card:rgba(255,255,255,0.1);
+  --blue:#1677b3;
+  --yellow:#f4e400;
+  --green:#0a8f3c;
+  --burgundy:#8B0000;
+  --teal:#20B2AA;
+}
+body.light{
+  --bg:#f0f0f0;
+  --text:#1a1a1a;
+  --card:rgba(0,0,0,0.05);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background 0.4s, color 0.4s;
+  overflow-x:hidden;
+}
+/* Переключатель темы */
+.theme-toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:100;
+  background:var(--card);
+  border:none;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  font-size:24px;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  transition:0.3s;
+}
+.theme-toggle:hover{transform:scale(1.1);}
+
+/* Параллакс-герой */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:120%;
+  background:url('city.jpg') center/cover no-repeat;
+  will-change:transform;
+  z-index:0;
+}
+.hero-overlay{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.5);
+  z-index:1;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:20px;
+}
+h1{
+  font-size:clamp(2rem, 10vw, 4rem);
+  background:linear-gradient(90deg,var(--yellow),#fff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:20px;
+  animation:fadeUp 1s ease-out;
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+.buttons{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  width:100%;
+  max-width:300px;
+  margin:30px auto 0;
+  animation:fadeUp 1s ease-out 0.3s both;
+}
+.btn{
+  padding:16px 20px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:1.1rem;
+  text-align:center;
+  transition:transform 0.2s, filter 0.2s;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+.btn-city{background:var(--yellow); color:#000;}
+.btn-knn{background:var(--burgundy); color:#fff;}
+.btn-nknh{background:var(--teal); color:#fff;}
+.btn:active{transform:scale(0.97);}
+@media (hover:hover){
+  .btn:hover{transform:scale(1.02); filter:brightness(1.1);}
+}
+
+/* Секция со счётчиками */
+.stats{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:30px;
+  padding:60px 20px;
+  background:var(--card);
+}
+.stat-item{
+  text-align:center;
+  min-width:150px;
+}
+.stat-number{
+  font-size:clamp(2rem, 8vw, 3.5rem);
+  font-weight:bold;
+  color:var(--yellow);
+  display:block;
+}
+.stat-label{
+  font-size:0.9rem;
+  opacity:0.8;
+  margin-top:8px;
+}
+
+/* Секция случайного факта */
+.fact-section{
+  text-align:center;
+  padding:60px 20px;
+}
+.fact-btn{
+  background:var(--green);
+  color:#fff;
+  border:none;
+  padding:16px 32px;
+  border-radius:50px;
+  font-size:1.1rem;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
+}
+.fact-btn:hover{transform:scale(1.05); background:var(--blue);}
+.fact-modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:200;
+  padding:20px;
+}
+.fact-modal.active{display:flex;}
+.fact-content{
+  background:var(--bg);
+  padding:40px 30px;
+  border-radius:20px;
+  max-width:500px;
+  text-align:center;
+  position:relative;
+  animation:popIn 0.3s ease-out;
+}
+@keyframes popIn{
+  from{transform:scale(0.8); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+.fact-close{
+  position:absolute;
+  top:10px;right:15px;
+  background:none;
+  border:none;
+  font-size:28px;
+  color:var(--text);
+  cursor:pointer;
+}
+.fact-text{
+  font-size:1.1rem;
+  line-height:1.6;
+  margin-top:20px;
+  color:var(--yellow);
+}
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" title="Сменить тему">🌙</button>
+
+<div class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>История Нижнекамска</h1>
+    <div class="buttons">
+      <a href="history.html" class="btn btn-city"> История города</a>
+      <a href="history-knn.html" class="btn btn-knn"> История КНН</a>
+      <a href="history-nknh.html" class="btn btn-nknh"> История НКНХ</a>
+    </div>
+  </div>
+</div>
+
+<!-- Счётчики -->
+<section class="stats">
+  <div class="stat-item">
+    <span class="stat-number" data-target="1961">0</span>
+    <div class="stat-label">год основания</div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" data-target="240000">0</span>
+    <div class="stat-label">жителей</div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" data-target="20000">0</span>
+    <div class="stat-label">сотрудников НКНХ</div>
+  </div>
+</section>
+
+<!-- Случайный факт -->
+<section class="fact-section">
+  <button class="fact-btn" onclick="showRandomFact()">🎲 Узнать случайный факт</button>
+</section>
+
+<!-- Модалка факта -->
+<div class="fact-modal" id="factModal">
+  <div class="fact-content">
+    <button class="fact-close" onclick="closeFact()">×</button>
+    <h3>✨ Интересный факт</h3>
+    <p class="fact-text" id="factText"></p>
+  </div>
+</div>
+
+<script>
+// Тема
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  const btn = document.querySelector('.theme-toggle');
+  btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+  localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+}
+// Восстановление темы
+if(localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light');
+  document.querySelector('.theme-toggle').textContent = '☀️';
+}
+
+// Параллакс
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const heroBg = document.getElementById('heroBg');
+  if(heroBg) {
+    heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+  }
+});
+
+// Анимированные счётчики
+function animateCounters(){
+  document.querySelectorAll('.stat-number').forEach(el => {
+    const target = +el.dataset.target;
+    const duration = 1500;
+    const start = performance.now();
+    function update(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const current = Math.floor(target * progress);
+      el.textContent = current.toLocaleString('ru-RU');
+      if(progress < 1) requestAnimationFrame(update);
+      else el.textContent = target.toLocaleString('ru-RU');
+    }
+    requestAnimationFrame(update);
+  });
+}
+// Запуск счётчиков при попадании в область видимости
+const statsSection = document.querySelector('.stats');
+const observer = new IntersectionObserver((entries) => {
+  if(entries[0].isIntersecting) {
+    animateCounters();
+    observer.disconnect();
+  }
+}, {threshold: 0.3});
+observer.observe(statsSection);
+
+// Случайный факт
+const facts = [
+  "Нижнекамск был основан в 1961 году как посёлок при нефтехимическом комбинате.",
+  "В 1966 году посёлок получил статус города, а его население перевалило за 30 тысяч человек.",
+  "В 1970-х Нижнекамск стал известен как «город молодожёнов» — сюда приезжали тысячи молодых семей со всего СССР.",
+  "В 1978 году комбинат «Нижнекамскнефтехим» награждён орденом Ленина.",
+  "В 1997 году Нижнекамск занял первое место в республике по вводу жилья на душу населения.",
+  "В 2007 году Нижнекамск признан самым благоустроенным городом Татарстана.",
+  "Колледж КНН в 2023 году вошёл в топ-100 лучших организаций СПО России.",
+  "Предприятие «Нижнекамскнефтехим» формирует бюджет Нижнекамска на 70%.",
+  "Нижнекамск — один из немногих городов России с естественным приростом населения.",
+  "В 2026 году Нижнекамск отпраздновал 60-летний юбилей."
+];
+function showRandomFact(){
+  const modal = document.getElementById('factModal');
+  const text = document.getElementById('factText');
+  text.textContent = facts[Math.floor(Math.random() * facts.length)];
+  modal.classList.add('active');
+}
+function closeFact(){
+  document.getElementById('factModal').classList.remove('active');
+}
+document.getElementById('factModal').addEventListener('click', (e) => {
+  if(e.target.id === 'factModal') closeFact();
+});
+</script>
+</body>
+</html>
